@@ -13,6 +13,14 @@ class SalesPerson extends Employees {
   makeSale(amount) {
     this.#totalSales += amount;
   }
+  findClient(name) {
+    for (let i = 0; i < this.client.length; i++) {
+      if (this.client[i].name === name) {
+        return this.client[i];
+      }
+    }
+    return null; 
+  }
 }
 
 module.exports = {

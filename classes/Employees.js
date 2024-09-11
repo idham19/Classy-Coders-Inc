@@ -16,6 +16,9 @@ class Employees {
 
   // Setter method to update salary
   setSalary(newSalary) {
+    if (this.#salary < 0) {
+      throw new Error("Salary cannot be negative");
+    }
     this.#salary = newSalary;
   }
   // Getter method for hire status
@@ -32,7 +35,7 @@ class Employees {
     }
   }
 
-  static getEmployees(){
+  static getEmployees() {
     return Employees.#allEmployees;
   }
   static getTotalPayroll() {
@@ -41,6 +44,34 @@ class Employees {
       total += employee.getSalary();
     }
     return total;
+  }
+
+  promote(newTitle, salaryIncrease) {
+    this.position = newTitle;
+    this.#salary += salaryIncrease;
+  }
+
+  BonusAndPromotion() {
+    let bonus = 0;
+    let promotionEligible = false;
+
+    if (score > 80) {
+      bonus = this.#salary * 0.1; // 10% bonus for high-performing employees
+      promotionEligible = true; // Eligible for promotion if score > 80
+    } else if (score > 60) {
+      bonus = this.#salary * 0.05; // 5% bonus for decent performance
+    }
+
+    console.log(`${this.name}'s performance score: ${score}`);
+    console.log(`${this.name}'s bonus: $${bonus}`);
+
+    if (promotionEligible) {
+      console.log(`${this.name} is eligible for promotion.`);
+    } else {
+      console.log(`${this.name} is not eligible for promotion.`);
+    }
+
+    return { bonus, promotionEligible };
   }
 }
 
